@@ -129,7 +129,8 @@ plt.show()
 #### 7. NdviUiAdapter
 
 The Normalized Difference Vegetation Index (NDVI) is an indicator of the presence of vegetation.
-The index is commonly defined as：
+The index is commonly defined as：<br/>
+
 <img src="https://github.com/Unispectral-SW/monarch-preprocess-app-docs/blob/main/docs/images/200263841-3c8fb948-693f-40a0-925b-2cbbacbe3b7d.png?raw=true" width="100" height="50"> <br/>
 
 where NIR is the reflectance in the near infrared (NIR) part of the spectrum and RED is the reflectance of the red band. For monarch, it takes band with CWL 713 nm for red band and band with CWL 805 nm for near infrared. In general, NDVI is an index to measure vegetation. When the NDVI value is high, the vegetation will be healthier. When the NDVI value is low, there is little or no vegetation.
