@@ -132,4 +132,4 @@ plt.show()
 
 ```
 
-> <img src="https://user-images.githubusercontent.com/98015835/199926988-bdb0650f-7bff-4a7d-8099-47b2cecb4719.png" width="900" height="400">
+> <img src="https://github.com/Unispectral-SW/monarch-preprocess-app-docs/blob/main/docs/images/199926988-bdb0650f-7bff-4a7d-8099-47b2cecb4719.png" width="900" height="400">
