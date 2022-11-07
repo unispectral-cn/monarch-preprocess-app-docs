@@ -6,7 +6,6 @@ from unispectral.spectrum import SpectrumRefUiAdapter
 
 ref_adapter = SpectrumRefUiAdapter(ref_save_path=r".cache/ref_save.txt")
 ref_adapter.load_cube("ref_fps_4_20220826_143719")
-)
 ref_adapter.exec("Rect", [616, 389, 150, 140])
 
 ```
@@ -19,7 +18,7 @@ from unispectral.spectrum import SpectrumObjUiAdapter
 
 obj_adapter = SpectrumObjUiAdapter(ref_mean=ref_adapter.mean_)
 obj_adapter.load_cube("cube_20220826_145339")
-)
+
 obj_adapter.exec("Rect", [576, 358, 40, 30])
 
 ```
@@ -33,13 +32,13 @@ import matplotlib.pyplot as plt
 
 ref_adapter = SpectrumRefUiAdapter(ref_save_path=r".cache/ref_save.txt")
 ref_adapter.load_cube("ref_fps_4_20220826_143719")
-)
+
 ref_adapter.exec("Rect", [616, 389, 150, 140])
 print(ref_adapter.mean_)
 
 obj_adapter = SpectrumObjUiAdapter(ref_mean=ref_adapter.mean_)
 obj_adapter.load_cube("cube_20220826_145339")
-)
+
 obj_adapter.exec("Rect", [576, 358, 40, 30])
 print(obj_adapter.mean_)
 

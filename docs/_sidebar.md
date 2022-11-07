@@ -1,6 +1,6 @@
 * Welcome to Unispectral SDK Document
     * [Getting Started](pages/getting_started.md)
-    * [Reference](pages/reference.md)
+    * [How to use SDK](pages/How_to_use_SDK.md)
         <!-- * [Preprocess](pages/preprocess.md) -->
         * [Spectrum](pages/spectrum.md)
         * [FalseColor](pages/falsecolor.md)
