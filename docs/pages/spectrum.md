@@ -54,4 +54,4 @@ plt.show()
 >[0.92567158 1.05070926 1.01867189 1.06260955 1.09689674 1.03808704
  1.05413997 1.13149283 1.20043288 1.21961825]
 
-> <img src="https://github.com/Unispectral-SW/monarch-preprocess-app-docs/blob/main/docs/images/199899940-c0b9dc76-80d5-41db-9b28-61c4be745a19.png" width="320" height="256">
+> <img src="https://github.com/Unispectral-SW/monarch-preprocess-app-docs/blob/main/docs/images/199899940-c0b9dc76-80d5-41db-9b28-61c4be745a19.png?raw=true" width="320" height="256">
