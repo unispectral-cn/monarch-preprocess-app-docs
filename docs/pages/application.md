@@ -110,6 +110,9 @@ If the model is generated successfully, the output folder will be opened automat
 You can download the [peanut_test_data](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.0/SDK_dataset.zip) and give it a try.
 
 ```python
+from unispectral.application.adapter import ApplicationUiAdapter
+import matplotlib.pyplot as plt
+
 adapter = ApplicationUiAdapter(image_mode="rgb")
 adapter.load_app(model_path)
 adapter.set_ref("ref_20221019_092834", RectRoi(656, 457, 130, 130))
