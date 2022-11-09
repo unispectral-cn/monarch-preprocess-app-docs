@@ -1,6 +1,9 @@
 #### 1. Training
 You can use the [UNS Model Generator V1.0.exe](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.0/UNS.Model.Generator.V1.0.exe) to create your own model.
 
+You can download the [peanut_traning_data](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.0/SDK_dataset.zip) and give it a try.
+
+
 ##### 1.1 Install UNS Model Generator
 <img src="https://github.com/Unispectral-SW/monarch-preprocess-app-docs/blob/main/docs/images/200252849-dafbf833-96ca-4f43-8ed8-22fd13ceef12.png?raw=true" width="600" height="500"><br/>
 
@@ -104,12 +107,13 @@ If the model is generated successfully, the output folder will be opened automat
 
 
 #### 2. Prediction
+You can download the [peanut_test_data](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.0/SDK_dataset.zip) and give it a try.
 
 ```python
 adapter = ApplicationUiAdapter(image_mode="rgb")
 adapter.load_app(model_path)
-adapter.set_ref(ref_path, RectRoi(656, 457, 130, 130))
-adapter.load_cube(cube_path)
+adapter.set_ref("ref_20221019_092834", RectRoi(656, 457, 130, 130))
+adapter.load_cube("cube_20221019_091559")
 
 output_img = adapter.exec()
 origin_img = load_cube(cube_path).data[:, :, 4]
@@ -124,19 +128,8 @@ ax[1].legend(
 )
 ax[1].imshow(output_img)
 
-# show accuracy
-if adapter.label_xys:
-    for label_xy, y_pred_cnt_pct in adapter.label_xys:
-        ax[1].annotate(
-            text="{:0.2f}".format(y_pred_cnt_pct),
-            xy=label_xy,
-            xytext=(-15, -2),
-            textcoords="offset points",
-            size=10,
-            color="r",
-        )
 plt.show()
 
 ```
 
-> <img src="https://github.com/Unispectral-SW/monarch-preprocess-app-docs/blob/main/docs/images/199926988-bdb0650f-7bff-4a7d-8099-47b2cecb4719.png?raw=true" width="900" height="400">
+> <img src="https://github.com/Unispectral-SW/monarch-preprocess-app-docs/blob/main/docs/images/98015835/200758740-df3f029e-f6ad-438e-a61a-2e51c89c5c78.png?raw=true" width="900" height="400">
