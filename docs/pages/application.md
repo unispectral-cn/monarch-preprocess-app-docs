@@ -114,8 +114,6 @@ from unispectral.application.adapter import ApplicationUiAdapter
 from unispectral.datasets.geometry import RectRoi
 from unispectral.datasets.spectral_cube import load_cube
 import matplotlib.pyplot as plt
-from unispectral.datasets.spectral_cube import load_cube
-from unispectral.datasets.geometry import RectRoi
 
 adapter = ApplicationUiAdapter(image_mode="rgb")
 adapter.load_app(r"SavedModels\Nuts and Shell_model_v1.0.pkl")
