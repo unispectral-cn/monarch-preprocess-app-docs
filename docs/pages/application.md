@@ -112,6 +112,8 @@ You can download the [peanut_test_data](https://github.com/Unispectral-SW/monarc
 ```python
 from unispectral.application.adapter import ApplicationUiAdapter
 import matplotlib.pyplot as plt
+from unispectral.datasets.spectral_cube import load_cube
+from unispectral.datasets.geometry import RectRoi
 
 adapter = ApplicationUiAdapter(image_mode="rgb")
 adapter.load_app(model_path)
