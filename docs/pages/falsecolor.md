@@ -1,4 +1,7 @@
 The Unispectral SDK provide the following adapters for developers to analysis spectral cube in a simple and convenient way.
+
+You can download the [dataset](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.0/SDK_dataset.zip) and give it a try.
+
 #### 1. PseudoRGBUiAdapter
 The pseudo RGB feature allows you to select 3 bands as the pseudo red band, pseudo green band and pseudo blue band and visualize a pseudo RGB false color result. 
 

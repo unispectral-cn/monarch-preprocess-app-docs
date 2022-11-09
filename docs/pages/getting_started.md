@@ -15,6 +15,9 @@ pip install unispectral-1.0.0-cp38-cp38-win_amd64.whl -i https://pypi.douban.com
 
 #### 3. Quick start
 You can start experiencing the SDK with the following sample code. The code will get the spectrum profile of a spectral cube. 
+
+You can download the [dataset](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.0/SDK_dataset.zip) and give it a try.
+
 ```python
 from unispectral.spectrum import SpectrumRefUiAdapter
 
