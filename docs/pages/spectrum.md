@@ -1,4 +1,7 @@
 The Unispectral SDK provide the following adapters for developers to analysis spectral cube in a simple and convenient way.
+
+You can download the [dataset](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.0/SDK_dataset.zip) and give it a try.
+
 #### 1. SpectrumRefUiAdapter
 
 ```python
