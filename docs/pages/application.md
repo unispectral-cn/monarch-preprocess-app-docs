@@ -10,6 +10,9 @@ You can download the [peanut_traning_data](https://github.com/Unispectral-SW/mon
 <img src="https://github.com/Unispectral-SW/monarch-preprocess-app-docs/blob/main/docs/images/200252861-a57200bd-17d4-43ad-9829-a6565fd754e2.png?raw=true" width="600" height="500"><br/>
 
 <img src="https://github.com/Unispectral-SW/monarch-preprocess-app-docs/blob/main/docs/images/200252868-d237a4fd-aa33-4f40-b013-0e313d50a584.png?raw=true" width="600" height="500"><br/>
+
+You must run this Model Generator APP as administrator.
+
 <img src="https://github.com/Unispectral-SW/monarch-preprocess-app-docs/blob/main/docs/images/200252876-f43db26e-968d-4c7e-a0c9-7b3a8ad2caea.png?raw=true" width="600" height="500"><br/>
 
 ##### 1.2 Prepare the training dataset
