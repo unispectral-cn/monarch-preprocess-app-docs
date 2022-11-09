@@ -114,17 +114,17 @@ You can download the [peanut_test_data](https://github.com/Unispectral-SW/monarc
 
 ```python
 from unispectral.application.adapter import ApplicationUiAdapter
-import matplotlib.pyplot as plt
-from unispectral.datasets.spectral_cube import load_cube
 from unispectral.datasets.geometry import RectRoi
+from unispectral.datasets.spectral_cube import load_cube
+import matplotlib.pyplot as plt
 
 adapter = ApplicationUiAdapter(image_mode="rgb")
-adapter.load_app(model_path)
-adapter.set_ref("ref_20221019_092834", RectRoi(656, 457, 130, 130))
-adapter.load_cube("cube_20221019_091559")
+adapter.load_app(r"SavedModels\Nuts and Shell_model_v1.0.pkl")
+adapter.set_ref(r"SDK_dataset\peanut_test_data\ref_20221019_092834", RectRoi(656, 457, 130, 130))
+adapter.load_cube(r"SDK_dataset\peanut_test_data\cube_20221019_091559")
 
 output_img = adapter.exec()
-origin_img = load_cube(cube_path).data[:, :, 4]
+origin_img = load_cube(r"SDK_dataset\peanut_test_data\cube_20221019_091559").data[:, :, 4]
 
 fig, ax = plt.subplots(1, 2)
 fig.set_size_inches((10, 5))
