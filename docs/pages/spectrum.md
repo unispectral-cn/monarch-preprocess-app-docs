@@ -7,7 +7,7 @@ You can download the [dataset](https://github.com/Unispectral-SW/monarch-preproc
 ```python
 from unispectral.spectrum import SpectrumRefUiAdapter
 
-ref_adapter = SpectrumRefUiAdapter(ref_save_path=r".cache/ref_save.txt")
+ref_adapter = SpectrumRefUiAdapter(ref_save_path=r"ref_save.txt")
 ref_adapter.load_cube("ref_fps_4_20220826_143719")
 ref_adapter.exec("Rect", [616, 389, 150, 140])
 
@@ -33,7 +33,7 @@ Use SpectrumRefUiAdapter and SpectrumObjUiAdapter to get the spectrum ref normed
 from unispectral.spectrum import SpectrumRefUiAdapter, SpectrumObjUiAdapter
 import matplotlib.pyplot as plt
 
-ref_adapter = SpectrumRefUiAdapter(ref_save_path=r".cache/ref_save.txt")
+ref_adapter = SpectrumRefUiAdapter(ref_save_path=r"ref_save.txt")
 ref_adapter.load_cube("ref_fps_4_20220826_143719")
 
 ref_adapter.exec("Rect", [616, 389, 150, 140])
