@@ -28,7 +28,7 @@ npm i docsify-cli -g
 ```
 
 ## 3. 启动docs
-进入monarch-preprocess-app\docs\beta>目录。执行：docsify serve docs
+进入monarch-preprocess-app\docs>目录。执行：docsify serve docs
 
 ## 4. 预览
 浏览器打开http://localhost:3000
