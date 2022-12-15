@@ -1,5 +1,5 @@
 The Unispectral SDK provide some efficient and useful preprocess algorithms.
-You can download the unispectral sdk [v1.0.1](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.1/unispectral-1.0.1-cp38-cp38-win_amd64.whl) to experience the following algorithms.
+You can download the unispectral sdk [v1.0.1 beta](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.1/unispectral-1.0.1-cp38-cp38-win_amd64.whl) to experience the following algorithms.
 
 #### 1. Binning
 #### 2. Denoise
