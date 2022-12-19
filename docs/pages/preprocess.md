@@ -1,9 +1,9 @@
 The Unispectral SDK provide some efficient and useful preprocess algorithms.
 You can download the unispectral sdk [v1.0.1 beta](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.1/unispectral-1.0.1-cp38-cp38-win_amd64.whl) to experience the following algorithms.
 
-#### 1. Binning
-#### 2. Denoise
-#### 3. Msc
+Download the [data.zip](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.1/data.zip) and unzip it to the path 'your_pip_path\Lib\site-packages\unispectral\datasets' to use the example data.
+
+#### 1. Msc
 Multiple scatter correction of spectral curve and image.
 
 3.1 Msc for spectral curve and image.
@@ -56,7 +56,7 @@ show_imgs([X[:, :, 5], Xt[:, :, 5]], titles=['before p-msc', 'after p-msc'])
 
 > <img src="images/preprocess/p-msc_img.png" width="450" height="300">
 
-#### 4. Normalization
+#### 2. Normalization
 Normalization of object image by reference.
 
 4.1 Normalization by big reference.
@@ -116,7 +116,7 @@ Xt = Normalization.mean_normalizer_darkref_exposure(X_obj, X_ref, X_dark, exposu
 show_imgs([X_obj[:, :, 0], Xt[:, :, 0]], titles=['original', 'normalization by small ref'])
 ```
 
-#### 5. Registration
+#### 3. Registration
 Registration of images of all bands.
 ```python
 from unispectral.datasets.spectral_cube import load_cube
@@ -128,7 +128,7 @@ Xt = Registration.fast_registration(X)
 show_imgs([np.sum(X, axis=2), np.sum(Xt, axis=2)], titles=['original', 'registration'])
 ```
 > <img src="images/preprocess/registration.png" width="450" height="300">
-#### 6. Roi
+#### 4. Roi
 Use Roi to get region of interest of the image.
 
 6.1 Roi of rectangle.
@@ -177,7 +177,7 @@ show_imgs([X_obj[:, :, 0], X_obj_roi[:, :, 0], X_obj_roi_mask, X_obj_mask[:, :, 
 ```
 > <img src="images/preprocess/roi_circle_center.png" width="550" height="350">
 
-#### 7. Segmentation
+#### 5. Segmentation
 Segmentation of an image.
 
 Select appropriate segmentation algorithm from ['threshold_local', 'threshold_otsu, 'threshold_yen', 'threshold_triangle'].
@@ -188,7 +188,7 @@ show_imgs([X[:, :, 5], Xt[:, :, 5]], titles=['original', 'segmentation'])
 ```
 > <img src="images/preprocess/segmentation.png" width="450" height="300">
 
-#### 8. SNV
+#### 6. SNV
 Standard Normal Variate transformation of spectral curve.
 
 The input reflectivity X will be transformed to absorption by log10(X).
@@ -205,7 +205,7 @@ show_curves([log10(1.0 / X), Xt], legend=['original', 'snv'])
 ```
 > <img src="images/preprocess/snv.png" width="450" height="300">
 
-#### 9. PCA
+#### 7. PCA
 Principal component analysis (PCA).
 ```python
 from unispectral.datasets import load_curves_example
