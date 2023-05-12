@@ -1,5 +1,5 @@
 #### 1. Training
-You can use the [UNS Model Generator V1.0.exe](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.0/UNS.Model.Generator.V1.0.exe) to create your own model.
+You can use the UNS Model Generator.exe from [release page](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases) to create your own model.
 
 You can download the [peanut_traning_data](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.0/SDK_dataset.zip) and give it a try.
 
