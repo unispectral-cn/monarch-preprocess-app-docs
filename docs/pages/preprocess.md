@@ -223,5 +223,55 @@ plt.show()
 ```
 > <img src="images/preprocess/pca.png" width="450" height="300">
 
+#### 8. MoveAverage
+Move average.
+```python
+import spectral
+import numpy as np
+import os
+import matplotlib.pyplot as plt
+from unispectral.preprocessing.move_average import MoveAverage
+
+def read_spectral_curve_from_file(dir_name, file_name, roi, radius):
+    FIX_DARK = 64
+    hdr_path = os.path.join(dir_name, file_name + ".hdr")
+    raw_path = os.path.join(dir_name, file_name + ".raw")
+    cube_array = spectral.envi.open(hdr_path, raw_path).load(dtype=np.uint16).asarray().copy()
+    X = cube_array - FIX_DARK
+    spc = np.mean(X[roi[1] - radius: roi[1] + radius, roi[0] - radius: roi[0] + radius, :], axis=(0, 1))
+    return spc
+
+def show_move_average(bands, spc_ref, spc_ma, bands_ma):
+    print(spc_ma, bands_ma)
+    fig, (ax1, ax2) = plt.subplots(2)
+    fig.suptitle('Spectral Curve Move Average')
+    plt.xlim([713, 920])
+    ax1.set_xlim([713, 920])
+    ax1.grid()
+    ax2.grid()
+    ax1.set_xticks(bands)
+    ax2.set_xticks(bands)
+    ax2.set_xlim([713, 920])
+    ax1.plot(bands, spc_ref)
+    ax2.plot(bands_ma, spc_ma)
+
+    plt.show()
+
+
+filename = "ENVI_cube_20230928_101700"
+cube_dir = r"C:\Users\uns_n\Documents\SpecCurves\spec_curves_772_20230928_101653\cube_20230928_101700"
+bands = np.array([713, 736, 759, 782, 805, 828, 851, 874, 897, 920])
+roi_ref = (614, 512)
+roi_obj = 666, 512
+radius = 18 // 2
+average_step = 3
+
+spc_ref = read_spectral_curve_from_file(cube_dir, filename, roi_ref, radius)
+spc_ma = MoveAverage.moving_average(spc_ref, average_step)
+bands_ma = MoveAverage.moving_average(bands, average_step)
+show_move_average(bands, spc_ref, spc_ma, bands_ma)
+```
+> <img src="images/preprocess/pca.png" width="450" height="300">
+
 
 
