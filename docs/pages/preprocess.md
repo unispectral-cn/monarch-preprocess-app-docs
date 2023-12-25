@@ -254,7 +254,6 @@ def show_move_average(bands, spc_ref, spc_ma, bands_ma):
     ax2.set_xlim([713, 920])
     ax1.plot(bands, spc_ref)
     ax2.plot(bands_ma, spc_ma)
-
     plt.show()
 
 
