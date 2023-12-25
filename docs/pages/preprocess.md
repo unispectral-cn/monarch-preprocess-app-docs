@@ -272,5 +272,68 @@ show_move_average(bands, spc_ref, spc_ma, bands_ma)
 ```
 > <img src="images/preprocess/move_average.png" width="450" height="300">
 
+#### 9. Vector Normalization
+Vector Normalization.
+```python
+import numpy as np
+from sklearn.decomposition import PCA
+import spectral
+from sklearn.preprocessing import StandardScaler
+import os
+import math
+import matplotlib.pyplot as plt
+from unispectral.preprocessing.vector_normalization import VectorNormalization
+
+
+def read_spectral_curve_from_file(dir_name, file_name, roi, radius):
+    FIX_DARK = 64
+    hdr_path = os.path.join(dir_name, file_name + ".hdr")
+    raw_path = os.path.join(dir_name, file_name + ".raw")
+    cube_array = spectral.envi.open(hdr_path, raw_path).load(dtype=np.uint16).asarray().copy()
+    X = cube_array - FIX_DARK
+    spc = np.mean(X[roi[1] - radius: roi[1] + radius, roi[0] - radius: roi[0] + radius, :], axis=(0, 1))
+    return spc
+
+
+def show_vec_normal(bands, spc_ref, bands_ma, spc_ma):
+    print(spc_ma, bands_ma)
+    fig, (ax1, ax2) = plt.subplots(2)
+    fig.suptitle('Spectral Curve Vector Normal')
+    plt.xlim([713, 920])
+    ax1.set_xlim([713, 920])
+    ax1.grid()
+    ax2.grid()
+    ax1.set_xticks(bands)
+    ax2.set_xticks(bands)
+    ax2.set_xlim([713, 920])
+    for i in range(len(spc_ref)):
+        ax1.plot(bands, spc_ref[i])
+    for i in range(len(spc_ma)):
+        ax2.plot(bands_ma, spc_ma[i])
+
+    plt.show()
+
+
+dirname = "cube_20230928_101700"
+cube_dir = r"C:\Users\uns_n\Documents\SpecCurves\spec_curves_772_20230928_101653\cube_20230928_101700"
+cube_dir = r"C:\Users\uns_n\Documents\SpecCurves\spec_curves_772_20230928_101653"
+
+bands = np.array([713, 736, 759, 782, 805, 828, 851, 874, 897, 920])
+roi_ref = (614, 512)
+roi_obj = 666, 512
+radius = 18 // 2
+X_spc = []
+
+for filename in os.listdir(cube_dir):
+    f = os.path.join(cube_dir, filename)
+    if os.path.isdir(f):
+        spc = read_spectral_curve_from_file(cube_dir + "\\" + filename, "ENVI_" + filename, roi_obj, radius)
+        X_spc.append(spc)
+
+X_spc_vn = VectorNormalization.vector_normalization(X_spc)
+show_vec_normal(bands, X_spc, bands, X_spc_vn)
+```
+> <img src="images/preprocess/move_average.png" width="450" height="300">
+
 
 
