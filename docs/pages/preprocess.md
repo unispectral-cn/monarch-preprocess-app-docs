@@ -271,7 +271,7 @@ spc_ma = MoveAverage.moving_average(spc_ref, average_step)
 bands_ma = MoveAverage.moving_average(bands, average_step)
 show_move_average(bands, spc_ref, spc_ma, bands_ma)
 ```
-> <img src="images/preprocess/move_average.png" width="450" height="300">
+> <img src="docs/images/preprocess/move_average.png" width="450" height="300">
 
 
 
