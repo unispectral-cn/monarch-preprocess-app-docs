@@ -333,7 +333,7 @@ for filename in os.listdir(cube_dir):
 X_spc_vn = VectorNormalization.vector_normalization(X_spc)
 show_vec_normal(bands, X_spc, bands, X_spc_vn)
 ```
-> <img src="images/preprocess/move_average.png" width="450" height="300">
+> <img src="images/preprocess/vec_normal.png" width="450" height="300">
 
 
 
