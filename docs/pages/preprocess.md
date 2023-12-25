@@ -298,7 +298,7 @@ def read_spectral_curve_from_file(dir_name, file_name, roi, radius):
 def show_vec_normal(bands, spc_ref, bands_ma, spc_ma):
     print(spc_ma, bands_ma)
     fig, (ax1, ax2) = plt.subplots(2)
-    fig.suptitle('Spectral Curve Vector Normal')
+    fig.suptitle('Spectral Curve Vector Normalization')
     plt.xlim([713, 920])
     ax1.set_xlim([713, 920])
     ax1.grid()
