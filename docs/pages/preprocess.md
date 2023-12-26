@@ -380,7 +380,7 @@ spc_ref = np.mean(X[roi_ref[1] - radius: roi_ref[1] + radius, roi_ref[0] - radiu
 r_list, i_list = FourierTransform.fourier_transform(spc_ref)
 show_fourier(r_list, i_list)
 ```
-> <img src="images/preprocess/vec_normal.png" width="450" height="300">
+> <img src="images/preprocess/fourier_transform.png" width="450" height="300">
 
 
 
