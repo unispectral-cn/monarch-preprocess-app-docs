@@ -315,7 +315,6 @@ def show_vec_normal(bands, spc_ref, bands_ma, spc_ma):
 
 
 dirname = "cube_20230928_101700"
-cube_dir = r"C:\Users\uns_n\Documents\SpecCurves\spec_curves_772_20230928_101653\cube_20230928_101700"
 cube_dir = r"C:\Users\uns_n\Documents\SpecCurves\spec_curves_772_20230928_101653"
 
 bands = np.array([713, 736, 759, 782, 805, 828, 851, 874, 897, 920])
@@ -332,6 +331,54 @@ for filename in os.listdir(cube_dir):
 
 X_spc_vn = VectorNormalization.vector_normalization(X_spc)
 show_vec_normal(bands, X_spc, bands, X_spc_vn)
+```
+> <img src="images/preprocess/vec_normal.png" width="450" height="300">
+
+#### 10. Fourier Transform
+Fourier Transform.
+```python
+import spectral
+import numpy as np
+import os
+import math
+import matplotlib.pyplot as plt
+from unispectral.preprocessing.fourier_transform import FourierTransform
+
+def show_fourier(r_list, i_list):
+    idx = [i for i in range(1, len(r_list) + 1)]
+    fig, (ax1, ax2) = plt.subplots(2)
+    fig.suptitle('Fourier Transform')
+
+    ax1.grid()
+    ax2.grid()
+
+    ax1.stem(idx, r_list, use_line_collection=True, basefmt="none")
+    ax1.set_xticks(idx)
+    ax1.set_xlabel("real")
+
+    ax2.stem(idx, i_list, use_line_collection=True, basefmt="none")
+    ax2.set_xticks(idx)
+    ax2.set_xlabel("imaginary")
+
+    plt.show()
+
+
+dirname = "cube_20230928_101700"
+cube_dir = r"C:\Users\uns_n\Documents\SpecCurves\spec_curves_772_20230928_101653\cube_20230928_101700"
+FIX_DARK = 64
+hdr_path = os.path.join(cube_dir, "ENVI_" + dirname + ".hdr")
+raw_path = os.path.join(cube_dir, "ENVI_" + dirname + ".raw")
+cube_array = spectral.envi.open(hdr_path, raw_path).load(dtype=np.uint16).asarray().copy()
+bands = np.array([713, 736, 759, 782, 805, 828, 851, 874, 897, 920])
+roi_ref = 614, 512
+roi_obj = 666, 512
+radius = 18 // 2
+
+X = cube_array - FIX_DARK
+spc_ref = np.mean(X[roi_ref[1] - radius: roi_ref[1] + radius, roi_ref[0] - radius: roi_ref[0] + radius, :], axis=(0, 1))
+
+r_list, i_list = FourierTransform.fourier_transform(spc_ref)
+show_fourier(r_list, i_list)
 ```
 > <img src="images/preprocess/vec_normal.png" width="450" height="300">
 
