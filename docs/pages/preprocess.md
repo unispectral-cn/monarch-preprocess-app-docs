@@ -420,7 +420,6 @@ def read_spectral_curve_from_file(dir_name, file_name, roi, radius):
 
 
 dirname = "cube_20230928_101700"
-cube_dir = r"C:\Users\uns_n\Documents\SpecCurves\spec_curves_772_20230928_101653\cube_20230928_101700"
 cube_dir = r"C:\Users\uns_n\Documents\SpecCurves\spec_curves_772_20230928_101653"
 
 bands = np.array([713, 736, 759, 782, 805, 828, 851, 874, 897, 920])
