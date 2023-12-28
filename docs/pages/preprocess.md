@@ -437,7 +437,7 @@ for filename in os.listdir(cube_dir):
 
 
 X_mean_center = MeanCentering.mean_centering(X_spc)
-show_mean_centering(bands, X_spc, bands, X_mean_center)
+show_mean_centering(bands, X_spc, X_mean_center)
 ```
 > <img src="images/preprocess/mean_centering.png" width="450" height="300">
 
