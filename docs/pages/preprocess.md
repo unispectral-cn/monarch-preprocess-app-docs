@@ -334,8 +334,8 @@ show_vec_normal(bands, X_spc, bands, X_spc_vn)
 ```
 > <img src="images/preprocess/vec_normal.png" width="450" height="300">
 
-#### 10. Fourier Transform
-Fourier Transform.
+#### 10. Discrete Fourier Transform
+Discrete Fourier Transform.
 ```python
 import spectral
 import numpy as np
@@ -381,6 +381,65 @@ r_list, i_list = FourierTransform.fourier_transform(spc_ref)
 show_fourier(r_list, i_list)
 ```
 > <img src="images/preprocess/fourier_transform.png" width="450" height="300">
+
+#### 11. Mean Centering
+Mean Centering.
+```python
+import numpy as np
+import spectral
+import os
+import math
+import matplotlib.pyplot as plt
+from unispectral.preprocessing.mean_centering import MeanCentering
+
+def show_mean_centering(bands, spc_ref, spc_ma):
+    fig, (ax1, ax2) = plt.subplots(2)
+    fig.suptitle('Spectral Curve Mean Centering')
+    plt.xlim([713, 920])
+    ax1.set_xlim([713, 920])
+    ax1.grid()
+    ax2.grid()
+    ax1.set_xticks(bands)
+    ax2.set_xticks(bands)
+    ax2.set_xlim([713, 920])
+    for i in range(len(spc_ref)):
+        ax1.plot(bands, spc_ref[i])
+    for i in range(len(spc_ma)):
+        ax2.plot(bands, spc_ma[i])
+
+    plt.show()
+
+def read_spectral_curve_from_file(dir_name, file_name, roi, radius):
+    FIX_DARK = 64
+    hdr_path = os.path.join(dir_name, file_name + ".hdr")
+    raw_path = os.path.join(dir_name, file_name + ".raw")
+    cube_array = spectral.envi.open(hdr_path, raw_path).load(dtype=np.uint16).asarray().copy()
+    X = cube_array - FIX_DARK
+    spc = np.mean(X[roi[1] - radius: roi[1] + radius, roi[0] - radius: roi[0] + radius, :], axis=(0, 1))
+    return spc
+
+
+dirname = "cube_20230928_101700"
+cube_dir = r"C:\Users\uns_n\Documents\SpecCurves\spec_curves_772_20230928_101653\cube_20230928_101700"
+cube_dir = r"C:\Users\uns_n\Documents\SpecCurves\spec_curves_772_20230928_101653"
+
+bands = np.array([713, 736, 759, 782, 805, 828, 851, 874, 897, 920])
+roi_ref = (614, 512)
+roi_obj = 666, 512
+radius = 18 // 2
+
+X_spc = []
+for filename in os.listdir(cube_dir):
+    f = os.path.join(cube_dir, filename)
+    if os.path.isdir(f):
+        spc = read_spectral_curve_from_file(cube_dir + "\\" + filename, "ENVI_" + filename, roi_obj, radius)
+        X_spc.append(spc)
+
+
+X_mean_center = MeanCentering.mean_centering(X_spc)
+show_mean_centering(bands, X_spc, bands, X_mean_center)
+```
+> <img src="images/preprocess/mean_centering.png" width="450" height="300">
 
 
 
