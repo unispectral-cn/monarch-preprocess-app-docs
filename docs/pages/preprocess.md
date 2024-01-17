@@ -440,7 +440,6 @@ show_mean_centering(bands, X_spc, X_mean_center)
 ```
 > <img src="images/preprocess/mean_centering.png" width="450" height="300">
 
-
 #### 12. Correction
 Correction of images of all bands.
 ```python
@@ -456,7 +455,6 @@ bands = list(range(713, 921, 5))
 kernel_size = 4
 X_obj_correction = Correction.cwl_angle_corrector(X_obj, bands_hyper, bands, path_model_type, kernel_size)
 show_imgs([X_obj[:, :, 16], X_obj_correction[:, :, 16]], titles=['before correction', 'after correction'])
-
 ```
 > <img src="images/preprocess/correction_angular.png" width="450" height="300">
 
