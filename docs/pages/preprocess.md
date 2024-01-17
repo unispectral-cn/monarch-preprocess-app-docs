@@ -441,4 +441,22 @@ show_mean_centering(bands, X_spc, X_mean_center)
 > <img src="images/preprocess/mean_centering.png" width="450" height="300">
 
 
+#### 12. Correction
+Correction of images of all bands.
+```python
+from unispectral.datasets.spectral_cube import load_cube
+from unispectral.preprocessing.correction import Correction
+from unispectral.visualization.utils import show_imgs
+import numpy as np
+cube_name = r"E:\data\hyper_spectral\sample\01\state8050_20231218_174639"
+X_obj = load_cube(cube_name).data
+path_model_type = './test_correction/pkl/peakW/peakW_test.mat'
+bands_hyper = list(range(713, 921, 5))
+bands = list(range(713, 921, 5))
+kernel_size = 4
+X_obj_correction = Correction.cwl_angle_corrector(X_obj, bands_hyper, bands, path_model_type, kernel_size)
+show_imgs([X_obj[:, :, 16], X_obj_correction[:, :, 16]], titles=['before correction', 'after correction'])
+
+```
+> <img src="images/preprocess/correction_angular.png" width="450" height="300">
 
