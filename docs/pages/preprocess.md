@@ -458,3 +458,73 @@ show_imgs([X_obj[:, :, 16], X_obj_correction[:, :, 16]], titles=['before correct
 ```
 > <img src="images/preprocess/correction_angular.png" width="450" height="300">
 
+#### 13. Autoscaling
+Autoscaling.
+```python
+import numpy as np
+import spectral
+import os
+import matplotlib.pyplot as plt
+from unispectral.preprocessing.autoscaling import Autoscaling
+
+
+def read_spectral_curve_from_file(dir_name, file_name, roi, radius):
+    FIX_DARK = 64
+    hdr_path = os.path.join(dir_name, file_name + ".hdr")
+    raw_path = os.path.join(dir_name, file_name + ".raw")
+    cube_array = spectral.envi.open(hdr_path, raw_path).load(dtype=np.uint16).asarray().copy()
+    X = cube_array - FIX_DARK
+    spc = np.mean(X[roi[1] - radius: roi[1] + radius, roi[0] - radius: roi[0] + radius, :], axis=(0, 1))
+    return spc
+
+
+def show_autoscaling(bands, spc_ref, col_mean, col_std):
+    # print(spc_ma, bands_ma)
+    fig, (ax1, ax2) = plt.subplots(2)
+    fig.suptitle('Spectral Curve Autoscaling')
+    plt.xlim([713, 920])
+    ax1.set_xlim([713, 920])
+    ax1.grid()
+    ax2.grid()
+    ax1.set_xticks(bands)
+    ax2.set_xticks(bands)
+    ax2.set_xlim([713, 920])
+    for i in range(len(spc_ref)):
+        ax1.plot(bands, spc_ref[i])
+
+    trans_spc = []
+    for row_id in range(len(spc_ref)):
+        spc_row = []
+        for col_id in range(len(spc_ref[0])):
+            trans = (spc_ref[row_id][col_id] - col_mean[col_id]) / col_std[col_id]
+            spc_row.append(trans)
+        trans_spc.append(spc_row)
+
+    for i in range(len(spc_ref)):
+        ax2.plot(bands, trans_spc[i])
+
+    plt.show()
+
+
+dirname = "cube_20230928_101700"
+cube_dir = r"C:\Users\uns_n\Documents\SpecCurves\spec_curves_772_20230928_101653\cube_20230928_101700"
+cubes_dir = r"C:\Users\uns_n\Documents\SpecCurves\spec_curves_772_20230928_101653"
+
+bands = np.array([713, 736, 759, 782, 805, 828, 851, 874, 897, 920])
+roi_ref = (614, 512)
+roi_obj = 666, 512
+radius = 18 // 2
+
+X_spc = []
+for filename in os.listdir(cubes_dir):
+    f = os.path.join(cubes_dir, filename)
+    if os.path.isdir(f):
+        spc = read_spectral_curve_from_file(cubes_dir + "\\" + filename, "ENVI_" + filename, roi_obj, radius)
+        X_spc.append(spc)
+
+
+col_mean, col_std = Autoscaling.autoscaling(X_spc)
+show_autoscaling(bands, X_spc, col_mean, col_std)
+```
+> <img src="images/preprocess/autoscaling.png" width="450" height="300">
+
