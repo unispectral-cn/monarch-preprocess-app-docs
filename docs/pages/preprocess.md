@@ -528,3 +528,75 @@ show_autoscaling(bands, X_spc, col_mean, col_std)
 ```
 > <img src="images/preprocess/autoscaling.png" width="450" height="300">
 
+#### 14. Difference First
+Autoscaling.
+```python
+import spectral
+import numpy as np
+import os
+import matplotlib.pyplot as plt
+from unispectral.preprocessing.difference_first import DifferenceFirst
+
+
+def read_spectral_curve_from_file(dir_name, file_name, roi, radius):
+    FIX_DARK = 64
+    hdr_path = os.path.join(dir_name, file_name + ".hdr")
+    raw_path = os.path.join(dir_name, file_name + ".raw")
+    cube_array = spectral.envi.open(hdr_path, raw_path).load(dtype=np.uint16).asarray().copy()
+    X = cube_array - FIX_DARK
+    spc = np.mean(X[roi[1] - radius: roi[1] + radius, roi[0] - radius: roi[0] + radius, :], axis=(0, 1))
+    return spc
+
+
+def diff_order_bands(bands, diff_order):
+    band_list = []
+    for idx in range(len(bands) - diff_order * 2):
+        band_list.append(bands[idx + diff_order])
+    return band_list
+
+
+def show_difference_order(bands, spc_ref, diff_bands, spc_diff):
+    # print(spc_ma, bands_ma)
+    fig, (ax1, ax2) = plt.subplots(2)
+    fig.suptitle('Spectral Curve Difference Order')
+    plt.xlim([713, 920])
+    ax1.set_xlim([713, 920])
+    ax1.set_ylabel("spec")
+    ax1.grid()
+    ax2.grid()
+    ax1.set_xticks(bands)
+    ax2.set_xticks(bands)
+    ax2.set_xlim([713, 920])
+    ax2.set_xlabel("wave length")
+    for i in range(len(spc_ref)):
+        ax1.plot(bands, spc_ref[i])
+
+    for i in range(len(spc_ref)):
+        ax2.plot(diff_bands, spc_diff[i])
+
+    plt.show()
+
+
+filename = "ENVI_cube_20230928_101700"
+cubes_dir = r"C:\Users\uns_n\Documents\SpecCurves\spec_curves_772_20230928_101653"
+
+bands = np.array([713, 736, 759, 782, 805, 828, 851, 874, 897, 920])
+roi_ref = (614, 512)
+roi_obj = 666, 512
+radius = 18 // 2
+
+X_spc = []
+for filename in os.listdir(cubes_dir):
+    f = os.path.join(cubes_dir, filename)
+    if os.path.isdir(f):
+        spc = read_spectral_curve_from_file(cubes_dir + "\\" + filename, "ENVI_" + filename, roi_obj, radius)
+        X_spc.append(spc)
+
+diff_order = 1
+spc_diff = DifferenceFirst.difference_first(X_spc, diff_order)
+diff_bands = diff_order_bands(bands, diff_order)
+
+show_difference_order(bands, X_spc, diff_bands, spc_diff)
+```
+> <img src="images/preprocess/autoscaling.png" width="450" height="300">
+
