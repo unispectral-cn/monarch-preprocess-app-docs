@@ -598,5 +598,5 @@ diff_bands = diff_order_bands(bands, diff_order)
 
 show_difference_order(bands, X_spc, diff_bands, spc_diff)
 ```
-> <img src="images/preprocess/autoscaling.png" width="450" height="300">
+> <img src="images/preprocess/difference_first.png" width="450" height="300">
 
