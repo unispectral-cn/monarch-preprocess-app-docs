@@ -223,5 +223,39 @@ plt.show()
 ```
 > <img src="images/preprocess/pca.png" width="450" height="300">
 
+#### 8. Uniformity Correction
+Using this UC algorithm can effectively eliminate angular shift issue in the images.
+```python
+from unispectral.preprocessing.uniformity_correction import UCModelInfer
+from unssolomon.UnsSolomonAPI import *
 
+#init camera
+camera = UnsSolomonController()
+result = camera.InitCam(device_id=0, unsSensorMode=UnsSernsortMode.emUnsMode_ALL)
+print("init camera result", result)
+time.sleep(15)
+
+uc_model_path=r'path/to/model.h5'
+wanted_cwls=[510,530,550,570,590,610,630,650,670,690,713,736,759,782,805,828,851,874,897,920]
+
+#get the supported bands of this camera
+bands_valid = camera.GetAvailableBands()
+
+#load the UC model
+uc_model_infer = UCModelInfer(uc_model_path)
+
+#get the capture plan.
+cap_cwls=uc_model_infer.get_captured_cwls(wanted_cwls,bands_valid,"ultra")
+
+#validate the cap_cwls
+cap_cwls=np.intersect1d(cap_cwls,bands_valid)
+
+#capture the original data
+[rawData, rgbData] = camera.CaptureCustomLUT(cap_cwls)
+cap_cube=np.array(rawData)
+
+#use UC model to get the corrected data
+corr_wanted_cube = uc_model_infer.infer(cap_cube,cap_cwls,wanted_cwls)
+
+```
 
