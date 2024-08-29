@@ -2,15 +2,15 @@
 You can download the unispectral sdk from [release page](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases).
 
 #### 2. Install the SDK.
-It is suggested to use python 3.8.10 and install the SDK with the following command.
+It is suggested to use python 3.9.13 and install the SDK with the following command.
 
 ```python
-pip install unispectral-1.0.0-cp38-cp38-win_amd64.whl
+pip install unispectral-x.x.x-win_amd64.whl
 ```
 
 Or you can accelerate the installation of dependent packages with the following command.
 ```python
-pip install unispectral-1.0.0-cp38-cp38-win_amd64.whl -i https://pypi.douban.com/simple
+pip install unispectral-x.x.x-win_amd64.whl -i https://pypi.douban.com/simple
 ``` 
 
 #### 3. Quick start

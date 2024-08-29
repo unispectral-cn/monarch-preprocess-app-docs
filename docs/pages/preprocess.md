@@ -1,7 +1,6 @@
 The Unispectral SDK provide some efficient and useful preprocess algorithms.
-You can download the unispectral sdk [v1.0.1 beta](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.1/unispectral-1.0.1-cp38-cp38-win_amd64.whl) to experience the following algorithms.
 
-Download the [data.zip](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.1/data.zip) and unzip it to the path 'your_pip_path\Lib\site-packages\unispectral\datasets' to use the example data.
+If needed you can download the [data.zip](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.1/data.zip) to run the sample code.
 
 
 #### 1. Uniformity Correction
@@ -260,7 +259,7 @@ plt.legend()
 plt.show()
 ```
 > <img src="images/preprocess/pca.png" width="450" height="300">
-
+<!-- 
 #### 9. MoveAverage
 Move average.
 ```python
@@ -636,4 +635,4 @@ diff_bands = diff_order_bands(bands, diff_order)
 show_difference_order(bands, X_spc, diff_bands, spc_diff)
 ```
 > <img src="images/preprocess/difference_first.png" width="450" height="300">
-
+ -->
