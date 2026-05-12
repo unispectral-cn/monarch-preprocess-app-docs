@@ -2,6 +2,58 @@ The Unispectral SDK provide some efficient and useful preprocess algorithms.
 
 If needed you can download the [data.zip](https://github.com/Unispectral-SW/monarch-preprocess-app-docs/releases/download/unispectral_sdk_v1.0.1/data.zip) to run the sample code.
 
+#### 1. Spectral Calculation
+Using computational spectroscopy to improve spectral image quality.
+```python
+import rasterio
+import numpy as np
+
+from unispectral.preprocessing.mems_fpi_cs_rec import MemsFpiCsRecInfer
+
+if __name__ == '__main__':
+    # 1. Parameters.
+    zarr_file = r"E:\test-data\FPI\242001DB_VIS.zarr"
+    json_file = r"E:\test-data\FPI\242001DB_VIS.json"
+
+    save_file = r"F:\source\develop\FPI\output\x_242001DB_rec.npy"
+    cube_file = r"E:\test-data\FPI\state5920_592_20260409_120353\ENVI_state5920_592_20260409_120353.raw"
+    with rasterio.open(cube_file) as src:
+        cube = src.read()  
+
+    print("cube.shape", cube.shape)
+    # 2. Reconstruction
+    obj_infer = MemsFpiCsRecInfer(zarr_file, json_file)
+    rec_x_cube = obj_infer.infer(cube, run_dev="cuda", rec_method="loop_d0", batch_size=3, set_lambda=0.6)
+
+    print("rec_x_cube.shape", rec_x_cube.shape)
+    np.save(save_file, rec_x_cube)
+
+    rec_x_cube = np.clip(rec_x_cube, a_min=rec_x_cube.min(), a_max=rec_x_cube.max())
+    
+    # numbers to range [0, 1]
+    data_min = rec_x_cube.min()
+    data_max = rec_x_cube.max()
+    if data_max > data_min:  
+        normalized = (rec_x_cube - data_min) / (data_max - data_min)
+    else:
+        normalized = np.zeros_like(rec_x_cube)
+    
+    # to range 0~1023 
+    scaled = normalized * 1023.0
+    
+    # convert to unsigned short (uint16)
+    rec_x_cube_uint16 = np.round(scaled).astype(np.uint16)
+    rec_x_cube_uint16 = np.moveaxis(rec_x_cube_uint16, source=2, destination=0)
+    
+    # save data
+    save_raw_file = r"F:\source\develop\FPI\output\x_242001DB_rec.raw"
+    with open(save_raw_file, 'wb') as f:
+        f.write(rec_x_cube_uint16.tobytes())
+
+    # 3. Show matrix.
+    obj_infer.show_measurement_matrix(128, 128)  # range from 0 to 255
+```
+
 
 #### 1. Uniformity Correction
 Using this UC algorithm can effectively eliminate angular shift issue in the images.
